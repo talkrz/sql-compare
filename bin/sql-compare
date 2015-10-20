@@ -1,0 +1,40 @@
+#!/usr/bin/env php
+<?php
+
+use Symfony\Component\Console\Output\ConsoleOutput as SymfonyConsole;
+
+require __DIR__ . '/../vendor/autoload.php';
+
+$leftDbUrl = isset($argv[1]) ? $argv[1] : '';
+$rightDbUrl = isset($argv[2]) ? $argv[2] : '';
+
+$console = new SymfonyConsole();
+
+if (!$leftDbUrl || !$rightDbUrl) {
+    $console->writeln("sql-compare - tool for comparing SQL databases built upon Doctrine DBAL\n");
+    $console->writeln("usage: sql-compare first_db_url second_db_url");
+    $console->writeln("example: sql-compare mysql://user:secret@localhost/db1 mysql://user:secret@localhost/db2");
+    exit(2);
+}
+
+$comparator = new SqlCompare\SchemaComparator($leftDbUrl, $rightDbUrl);
+
+try {
+    $sqls = $comparator->diff();
+} catch(\Doctrine\DBAL\Exception\ConnectionException $e) {
+    $console->writeln(
+        sprintf(
+            "<error>Whoops, can't connect to one of DBs. See DB driver error message for details:\n%s</error>",
+            $e->getMessage())
+        );
+    exit(1);
+}
+
+if (!empty($sqls)) {
+    $console->writeln("<info>To convert schema of the first database to the second one execute following queries:</info>");
+    foreach($sqls as $sql) {
+        $console->writeln($sql);
+    }
+} else {
+    $console->writeln('Both databases schemas are identical');
+}
