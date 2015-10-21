@@ -67,7 +67,8 @@ class SchemaComparator
     }
 
     /**
-     * Create Doctrine DBAL schema object
+     * Create Doctrine DBAL connection
+     *
      * @param  string $dbUrl db url allowed for Doctrine DBAL
      * @return Connection
      */
