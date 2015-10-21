@@ -12,7 +12,7 @@ php sql-compare.phar mysql://user:secret@server/db1 mysql://user:secret@server/d
 
 The tool will output a list of SQL queries required to update the first database schema to be identical with the second one.
 Let's assume that *db1* database, when compared the *db2*, has following differences:
- * missing the *missing_table* table
+ * it does not contain *missing_table* table
  * *some_table* table does not contain the *missing_field* column
  * the *changed_field* of *some_table* has different type
  * the index on *some_id* field in *some_table* is missing
