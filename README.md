@@ -3,11 +3,11 @@ Command line tool for comparing databases schema, built upon Doctrine DBAL
 
 ## Usage
 
-TODO: Build phar archive of the applicaiton, and describe how to download it.
+1. Download the executable: [`sql-compare.phar`](https://github.com/talkrz/sql-compare/releases/download/v1.0.0/sql-compare.phar)
 
-To compare two MySQL databases type:
+2. To compare two MySQL databases type:
 ```bash
-bin/sql-compare mysql://user:secret@server/db1 mysql://user:secret@server/db2
+php sql-compare.phar mysql://user:secret@server/db1 mysql://user:secret@server/db2
 ```
 
 The tool will output a list of SQL queries required to convert from first to second schema, like this:
