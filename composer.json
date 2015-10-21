@@ -1,4 +1,17 @@
 {
+    "name": "talkrz/sql-compare",
+    "description": "SQL databases schema comparator",
+    "keywords": [
+        "sql", "compare", "schema"
+    ],
+    "homepage": "https://github.com/talkrz/sql-compare",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Krzysztof Tałajko",
+            "email": "krzysztof.talajko@gmail.com"
+        }
+    ],
     "require": {
         "doctrine/dbal": "~2.5",
         "symfony/console": "~2.7"
